@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="jquery.session.js"></script>
+    <style>
+        .center {
+            width: 80%; /* Ширина элемента в пикселах */
+            margin: auto; /* Выравниваем по центру */
+        }
+
+        .head {
+        / / clear: center;
+            text-align: center;
+        / / background-image: url("resources/images/logo.png");
+            min-height: 20%;
+            width: 100%;
+        }
+
+        .input {
+            text-align: center;
+            background-color: #C0C0C0;
+            width: 100%;
+        }
+    </style>
+
+    <script>
+        //        $(function() {
+        //            $('form').submit(function(e) {
+        //             //  $.session.set("login", "321");
+        //            });
+        //        });
+//        $(function () {
+//            $('form').submit(function (e) {
+//             //   alert("123");
+//                var $form = $(this);
+//                $.ajax({
+//                    type: $form.attr('method'),
+//                    url: $form.attr('action'),
+//                    data: $form.serialize()
+//                }).done(function () {
+//                    console.log('success');
+//                }).fail(function () {
+//                    console.log('fail');
+//                });
+//                //отмена действия по умолчанию для кнопки submit
+//                e.preventDefault();
+//            });
+//        });
+    </script>
+
+</head>
+<body>
+<div class="center">
+    <div class="head">
+
+    </div>
+
+    <div class="input">
+        <p><b>Лабораторная работа № 3</b></p>
+        <p><b>Выполнили: Егоров A.Д. / Лысенко С.В. / Божик A.И. </b></p>
+        <p><b>Группа P3219</b></p>
+        <p><b>Вариант 923</b></p>
+        <p id="messegeResult"></p>
+        <form id="formMain" method="post" action="rest/user/auth">
+            <label for="log">Логин </label> <input type="text" name="login" id="log"> <br/>
+            <label for="passw">Пароль</label> <input type="password" name="password" id="passw"> <br/>
+            <input type="submit" value="Вход"/> <br/>
+        </form>
+        <input type="button" value="Регистрация" onclick="alert(session.getAttribute('login'));"/>
+    </div>
+
+</div>
+
+</body>
+</html>

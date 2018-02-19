@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>123</title>
+    <style>
+        .listOfLangs {
+        //height: %;
+            height: 600px;
+            width: 20%;
+            min-width: 20%;
+            background-color: #b3d4fc;
+            overflow-y: scroll;
+            position: relative;
+            display: inline-block;
+            float: left;
+        }
+
+        .info {
+            height: 600px;
+            width: 80%;
+            position: relative;
+            display: inline-block;
+            background-color: #555555;
+        }
+
+        input[type="submit"]{
+            display: block;
+            margin: 0% 7%;
+        // height: 100%;
+        // width:18%;
+            -webkit-transition: all.9s ease;
+            -moz-transition: all.9s ease;
+            text-decoration:none;
+            text-align:center;
+            border:none;
+            font-weight:bold;
+            color: black;
+            background-color: rgba(0,0,0,0);
+
+        }
+        input[type="submit"]:hover{
+            background-color: rgba(0,0,0,.6);
+            -webkit-box-shadow:0px 0px 8px #555, inset 0px 0px 1px #000;
+            -moz-box-shadow: 0px 0px 8px #555,  inset 0px 0px 1px #000;
+            box-shadow:0px 0px 8px #555, inset 0px 0px 1px #000;
+            color: white;
+        }
+        input[type="submit"]:active{
+            background-color: rgba(0,0,0,.6);
+
+        }
+    </style>
+
+</head>
+<body>
+<div class="listOfLangs">
+    <form method="get" action="rest/langs">
+        <input type='submit' name='lang' value='Абхазский язык'>
+        <input type='submit' name='lang' value='Адыгейский язык'>
+        <input type='submit' name='lang' value='Азербайджанский язык'>
+        <input type='submit' name='lang' value='Албанский язык'>
+        <input type='submit' name='lang' value='Английский язык'>
+        <input type='submit' name='lang' value='Арабский язык'>
+        <input type='submit' name='lang' value='Армянский язык'>
+        <input type='submit' name='lang' value='Башкирский язык'>
+        <input type='submit' name='lang' value='Белорусский язык'>
+        <input type='submit' name='lang' value='Бенгальский язык'>
+        <input type='submit' name='lang' value='Болгарский язык'>
+        <input type='submit' name='lang' value='Боснийский язык'>
+        <input type='submit' name='lang' value='Булгарский язык'>
+        <input type='submit' name='lang' value='Бурятский язык'>
+        <input type='submit' name='lang' value='Венгерский язык'>
+        <input type='submit' name='lang' value='Вьетнамский язык'>
+        <input type='submit' name='lang' value='Гавайский язык'>
+        <input type='submit' name='lang' value='Готский язык'>
+        <input type='submit' name='lang' value='Гренландский язык'>
+        <input type='submit' name='lang' value='Греческий язык'>
+        <input type='submit' name='lang' value='Грузинский язык'>
+        <input type='submit' name='lang' value='Древнеанглийский язык'>
+        <input type='submit' name='lang' value='Древневерхненемецкий язык'>
+        <input type='submit' name='lang' value='Древнегреческий язык'>
+        <input type='submit' name='lang' value='Древнееврейский язык'>
+        <input type='submit' name='lang' value='Древнеисландский язык'>
+        <input type='submit' name='lang' value='Древнеперсидский язык'>
+        <input type='submit' name='lang' value='Древнерусский язык'>
+        <input type='submit' name='lang' value='Ижорский язык'>
+        <input type='submit' name='lang' value='Ингушский язык'>
+        <input type='submit' name='lang' value='Индонезийский язык'>
+        <input type='submit' name='lang' value='Ирландский язык'>
+        <input type='submit' name='lang' value='Исландский язык'>
+        <input type='submit' name='lang' value='Испанский язык'>
+        <input type='submit' name='lang' value='Итальянский язык'>
+        <input type='submit' name='lang' value='Коми'>
+        <input type='submit' name='lang' value='Корейский язык'>
+        <input type='submit' name='lang' value='Китайский язык'>
+        <input type='submit' name='lang' value='Кумыкский язык'>
+        <input type='submit' name='lang' value='Лаосский язык'>
+        <input type='submit' name='lang' value='Латинский язык'>
+        <input type='submit' name='lang' value='Латышский язык'>
+        <input type='submit' name='lang' value='Литовский язык'>
+        <input type='submit' name='lang' value='Люксембургский язык'>
+        <input type='submit' name='lang' value='Македонский язык'>
+        <input type='submit' name='lang' value='Малагасийский язык'>
+        <input type='submit' name='lang' value='Малайский язык'>
+        <input type='submit' name='lang' value='Мальтийский язык'>
+        <input type='submit' name='lang' value='Молдавский язык'>
+        <input type='submit' name='lang' value='Монгольский язык'>
+        <input type='submit' name='lang' value='Неаполитанский язык'>
+        <input type='submit' name='lang' value='Немецкий язык'>
+        <input type='submit' name='lang' value='Непальский язык'>
+        <input type='submit' name='lang' value='Нидерландский язык'>
+        <input type='submit' name='lang' value='Норвежский язык'>
+        <input type='submit' name='lang' value='Окинавский язык'>
+        <input type='submit' name='lang' value='Осетинский язык'>
+        <input type='submit' name='lang' value='Османский язык'>
+        <input type='submit' name='lang' value='Персидский язык'>
+        <input type='submit' name='lang' value='Печенежский язык'>
+        <input type='submit' name='lang' value='Польский язык'>
+        <input type='submit' name='lang' value='Пушту'>
+        <input type='submit' name='lang' value='Пьемонтский язык'>
+        <input type='submit' name='lang' value='Румынский язык'>
+        <input type='submit' name='lang' value='Русский язык'>
+        <input type='submit' name='lang' value='Сербский язык'>
+        <input type='submit' name='lang' value='Сингальский язык'>
+        <input type='submit' name='lang' value='Сирийский язык'>
+        <input type='submit' name='lang' value='Сицилийский язык'>
+        <input type='submit' name='lang' value='Словацкий язык'>
+        <input type='submit' name='lang' value='Словенский язык'>
+        <input type='submit' name='lang' value='Сомалийский язык'>
+        <input type='submit' name='lang' value='Сунданский язык'>
+        <input type='submit' name='lang' value='Табасаранский язык'>
+        <input type='submit' name='lang' value='Тагальский язык'>
+        <input type='submit' name='lang' value='Таджикский язык'>
+        <input type='submit' name='lang' value='Таитянский язык'>
+        <input type='submit' name='lang' value='Татарский язык'>
+        <input type='submit' name='lang' value='Тибетский язык'>
+        <input type='submit' name='lang' value='Тувинский язык'>
+        <input type='submit' name='lang' value='Турецкий язык'>
+        <input type='submit' name='lang' value='Туркменский язык'>
+        <input type='submit' name='lang' value='Удмуртский язык'>
+        <input type='submit' name='lang' value='Удэгейский язык'>
+        <input type='submit' name='lang' value='Узбекский язык'>
+        <input type='submit' name='lang' value='Уйгурский язык'>
+        <input type='submit' name='lang' value='Украинский язык'>
+        <input type='submit' name='lang' value='Финский язык'>
+        <input type='submit' name='lang' value='Французский язык'>
+        <input type='submit' name='lang' value='Хазарский язык'>
+        <input type='submit' name='lang' value='Хакасский язык'>
+        <input type='submit' name='lang' value='Хинди'>
+        <input type='submit' name='lang' value='Хорватский язык'>
+        <input type='submit' name='lang' value='Эстонский язык'>
+        <input type='submit' name='lang' value='Японский язык'>
+    </form>
+
+</div>
+<div class="info">
+    <p>Name</p>
+    <p>Kind</p>
+    <p>NoS</p>
+    <p>Nation</p>
+    <p>Country</p>
+</div>
+
+</body>
+</html>

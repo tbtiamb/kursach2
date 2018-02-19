@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        div {
+        }
+
+        .center {
+            margin: auto;
+            width: 80%;
+        }
+
+        .input {
+            height: 20%;
+            min-height: 300px;
+            width: calc(100% - 600px);
+            background-color: #DCDCDC;
+            display: inline-block;
+            float: left;
+            text-align: center;
+        }
+
+        .canvas {
+            background-color: #FFFACD;
+            display: inline-block;
+            float: right;
+        }
+
+        .results {
+            text-align: center;
+            background-color: #F5F5DC;
+            height: 300px;
+            width: calc(100% - 600px);
+            overflow-y: scroll;
+            display: block;
+        }
+
+        table {
+            border: 1px solid black;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+
+        a {
+            margin-right: auto;
+            margin-left: auto;
+        }
+        #coordX{
+            text-align: center;
+        }
+        .goHome{
+            text-align: center;
+            width: 100%;
+            height: 20%;
+        }
+    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+//        $(function() {
+//            $('form').submit(function(e) {
+//                alert("123");
+//                var $form = $(this);
+//                $.ajax({
+//                    type: $form.attr('method'),
+//                    url: $form.attr('action'),
+//                    data: $form.serialize()
+//                }).done(function() {
+//                    console.log('success');
+//                }).fail(function() {
+//                    console.log('fail');
+//                });
+//                //отмена действия по умолчанию для кнопки submit
+//                e.preventDefault();
+//            });
+//        });
+    </script>
+
+</head>
+<body>
+<div class="center">
+    <div class="input">
+        <form method="get" action="rest/check/getResult">
+        <!--onsubmit="return validate();-->
+            <h4>Введите данные:</h4>
+            X:
+            <input type="text" name="x" id="textX" />
+            <br/>
+            Y:
+            <input type="text" name="y"  id="coordY" />
+            <br/>
+            R:
+            <input type="text" name="rad" id="radius" onchange="refreshFigure();" />
+            <!--allCorrds();-->
+            <br/>
+            <input type="submit" id="submit" value="Отправить"/>
+        </form>
+    </div>
+    <div class="canvas">
+        <canvas id="canvasId" onmousedown="drawDot(event);" width="600px" height="600px"></canvas>
+        <script src = "script.js" type="text/javascript"></script>
+    </div>
+    <div class="results">
+    </div>
+    <div class="goHome">
+
+    </div>
+</div>
+</body>
+</html>

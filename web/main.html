@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/php; charset=utf-8"/>
+    <title>Языки</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="jquery.session.js"></script>
+    <script>
+        $(function () {
+            $('#test').click(function () {
+                alert($.session.get("login"));
+                alert(document.cookie);
+            });
+        });
+    </script>
+    <style>
+        .linkButton {
+            background: none;
+            border: none;
+            color: #0066ff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<table cellpadding="0" cellspacing="0" align="center">
+    <tr>
+        <td class="header">
+            <a href="./index.html"><img src="logo.png" alt="На главную" width="200px"></a>
+        </td>
+    </tr>
+    <tr>
+        <td class="links">
+            <input type="button" value="На главную" onClick='location.href="./index.html"'>
+            <input type="button" value="Разговорные языки" id="test">
+            <form method="get" action="rest/langs/lang">
+                <input type="submit" class="linkButton" name="x" value="Языки программирования">
+            </form>
+            <div class="block"></div>
+
+        </td>
+    </tr>
+    <tr>
+        <td class="cnt">a
+
+            <table cellpadding="0" cellspacing="8" align="center">
+                <tr>
+                    <td class="content">
+
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+    <tr>
+        <td class="footer">
+            &copy; Все права защищены<br>
+            Мамиконян Н.Н. и Божик А.И. группа P3219, вариант 502
+    </tr>
+</table>
+</body>
