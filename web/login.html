@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="jquery.session.js"></script>
     <style>
         .center {
             width: 80%; /* Ширина элемента в пикселах */
@@ -64,12 +63,12 @@
         <p><b>Группа P3219</b></p>
         <p><b>Вариант 923</b></p>
         <p id="messegeResult"></p>
-        <form id="formMain" method="post" action="rest/user/auth">
+        <form id="formMain" method="post" action="/kursach2/rest/user/auth">
             <label for="log">Логин </label> <input type="text" name="login" id="log"> <br/>
             <label for="passw">Пароль</label> <input type="password" name="password" id="passw"> <br/>
             <input type="submit" value="Вход"/> <br/>
         </form>
-        <input type="button" value="Регистрация" onclick="alert(session.getAttribute('login'));"/>
+        <a href="/kursach2/rest/user/register">Регистрация</a>
     </div>
 
 </div>

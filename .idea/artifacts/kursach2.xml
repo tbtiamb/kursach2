@@ -9,9 +9,7 @@
           <element id="jpa-descriptors" facet="kursach2/jpa/JPA" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="JPA 2.0-2.0" />
           <element id="library" level="project" name="lib" />
-          <element id="library" level="project" name="com.sun.jersey:jersey-bundle:1.18.3" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="kursach2/ejb/EJB" />

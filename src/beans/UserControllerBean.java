@@ -6,10 +6,7 @@ import entities.UsersEntity;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 
 @LocalBean
 @Stateful//(name = "UserControllerEJB")
@@ -17,11 +14,16 @@ public class UserControllerBean {
     public UserControllerBean() {
     }
 
+   // @PersistenceContext
+    //private EntityManager em;
+   //@PersistenceContext(unitName = "Languages")
+   //private EntityManager em;
+
     public void addUser(String login, String password){
         UsersEntity.addUser(login, password);
     }
 
-    public boolean authentication(String login, String password){
+    public UsersEntity authentication(String login, String password){
         try {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
             EntityManager em = emf.createEntityManager();
@@ -30,11 +32,11 @@ public class UserControllerBean {
             query.setParameter("password", password.hashCode());
             UsersEntity result = (UsersEntity) query.getSingleResult();
             //return "123";
-            return true;
+            return result;
         }
         catch (Exception e){
            //return "321";
-            return false;
+            return null;
         }
     }
 }
