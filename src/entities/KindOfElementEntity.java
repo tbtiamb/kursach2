@@ -2,31 +2,27 @@ package entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
-@Table(name = "ВИД_ЭЛЕМЕНТА", schema = "s223552", catalog = "studs")
-public class KindOfElementEntity implements Serializable {
-    public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
-    public static EntityManager em = emf.createEntityManager();
-    private static final int serialVersionUID = 1;
-
-    private int kind_id;
+@Table(name = "kind_of_element", schema = "s223552", catalog = "studs")
+public class KindOfElementEntity implements Serializable{
+    private int kindId;
     private String kind;
     private String subkind;
-
-
-//    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<ElementEntity> elements = new ArrayList<>();
+    private Collection<ElementsEntity> elementsByKindId;
 
     public KindOfElementEntity() {}
 
-    public KindOfElementEntity(int kind_id, String kind, String subkind) {
-        this.kind_id = kind_id;
+    public KindOfElementEntity(String kind, String subkind) {
         this.kind = kind;
         this.subkind = subkind;
+    //    this.elementsByKindId = elementsByKindId;
     }
 
     public static KindOfElementEntity readElem(int id){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         KindOfElementEntity elem = em.find(KindOfElementEntity.class, id);
         em.getTransaction().commit();
@@ -34,31 +30,34 @@ public class KindOfElementEntity implements Serializable {
     }
 
     public static void addElem(KindOfElementEntity elem) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(elem);
         em.getTransaction().commit();
     }
 
     public static void removeElem(KindOfElementEntity elem) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.remove(elem);
         em.getTransaction().commit();
     }
 
-
     @Id
-    @GeneratedValue//(strategy = GenerationType.IDENTITY)
-    @Column(name = "ИД_ВИДА")
-    public int getKind_id() {
-        return kind_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "kind_id", nullable = false)
+    public int getKindId() {
+        return kindId;
     }
 
-    public void setKind_id(int kind_id) {
-        this.kind_id = kind_id;
+    public void setKindId(int kindId) {
+        this.kindId = kindId;
     }
 
     @Basic
-    @Column(name = "ВИД")
+    @Column(name = "kind", nullable = false, length = -1)
     public String getKind() {
         return kind;
     }
@@ -68,7 +67,7 @@ public class KindOfElementEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ПОДВИД")
+    @Column(name = "subkind", nullable = false, length = -1)
     public String getSubkind() {
         return subkind;
     }
@@ -84,7 +83,7 @@ public class KindOfElementEntity implements Serializable {
 
         KindOfElementEntity that = (KindOfElementEntity) o;
 
-        if (kind_id != that.kind_id) return false;
+        if (kindId != that.kindId) return false;
         if (kind != null ? !kind.equals(that.kind) : that.kind != null) return false;
         if (subkind != null ? !subkind.equals(that.subkind) : that.subkind != null) return false;
 
@@ -93,9 +92,18 @@ public class KindOfElementEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = kind_id;
+        int result = kindId;
         result = 31 * result + (kind != null ? kind.hashCode() : 0);
         result = 31 * result + (subkind != null ? subkind.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "kindOfElementByKindId")
+    public Collection<ElementsEntity> getElementsByKindId() {
+        return elementsByKindId;
+    }
+
+    public void setElementsByKindId(Collection<ElementsEntity> elementsByKindId) {
+        this.elementsByKindId = elementsByKindId;
     }
 }

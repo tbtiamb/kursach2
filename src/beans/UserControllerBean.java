@@ -1,12 +1,10 @@
 package beans;
 
 
-import entities.UsersEntity;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 import javax.persistence.*;
+import entities.*;
 
 @LocalBean
 @Stateful//(name = "UserControllerEJB")
@@ -19,8 +17,9 @@ public class UserControllerBean {
    //@PersistenceContext(unitName = "Languages")
    //private EntityManager em;
 
-    public void addUser(String login, String password){
-        UsersEntity.addUser(login, password);
+    public void addUser(UsersEntity user){
+        //UsersEntity.addUser(login, password, email);
+        UsersEntity.addUser(user);
     }
 
     public UsersEntity authentication(String login, String password){
@@ -31,7 +30,6 @@ public class UserControllerBean {
             query.setParameter("login", login);
             query.setParameter("password", password.hashCode());
             UsersEntity result = (UsersEntity) query.getSingleResult();
-            //return "123";
             return result;
         }
         catch (Exception e){

@@ -1,26 +1,26 @@
 package entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
-@Table(name = "ПАРАДИГМЫ", schema = "s223552", catalog = "studs")
-public class ParadigmsEntity implements Serializable {
-    public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
-    public static EntityManager em = emf.createEntityManager();
-    private static final int serialVersionUID = 1;
-
-    private int paradigm_id;
+@Table(name = "paradigms", schema = "s223552", catalog = "studs")
+public class ParadigmsEntity {
+    private int paradigmId;
     private String paradigm;
+    private Collection<ParadigmsOfLangEntity> paradigmsOfLangsByParadigmId;
 
-    public ParadigmsEntity() {}
+    public ParadigmsEntity() {
+    }
 
-    public ParadigmsEntity(int paradigm_id, String paradigm) {
-        this.paradigm_id = paradigm_id;
+    public ParadigmsEntity(String paradigm, Collection<ParadigmsOfLangEntity> paradigmsOfLangsByParadigmId) {
         this.paradigm = paradigm;
+        this.paradigmsOfLangsByParadigmId = paradigmsOfLangsByParadigmId;
     }
 
     public static ParadigmsEntity readElem(int id){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         ParadigmsEntity elem = em.find(ParadigmsEntity.class, id);
         em.getTransaction().commit();
@@ -28,30 +28,34 @@ public class ParadigmsEntity implements Serializable {
     }
 
     public static void addElem(ParadigmsEntity elem) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(elem);
         em.getTransaction().commit();
     }
 
     public static void removeElem(ParadigmsEntity elem) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.remove(elem);
         em.getTransaction().commit();
     }
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ИД_ПАРАДИГМЫ")
-    public int getParadigm_id() {
-        return paradigm_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "paradigm_id", nullable = false)
+    public int getParadigmId() {
+        return paradigmId;
     }
 
-    public void setParadigm_id(int paradigm_id) {
-        this.paradigm_id = paradigm_id;
+    public void setParadigmId(int paradigmId) {
+        this.paradigmId = paradigmId;
     }
 
     @Basic
-    @Column(name = "ПАРАДИГМА")
+    @Column(name = "paradigm", nullable = false, length = -1)
     public String getParadigm() {
         return paradigm;
     }
@@ -67,7 +71,7 @@ public class ParadigmsEntity implements Serializable {
 
         ParadigmsEntity that = (ParadigmsEntity) o;
 
-        if (paradigm_id != that.paradigm_id) return false;
+        if (paradigmId != that.paradigmId) return false;
         if (paradigm != null ? !paradigm.equals(that.paradigm) : that.paradigm != null) return false;
 
         return true;
@@ -75,8 +79,17 @@ public class ParadigmsEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = paradigm_id;
+        int result = paradigmId;
         result = 31 * result + (paradigm != null ? paradigm.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "paradigmsByParadigmId")
+    public Collection<ParadigmsOfLangEntity> getParadigmsOfLangsByParadigmId() {
+        return paradigmsOfLangsByParadigmId;
+    }
+
+    public void setParadigmsOfLangsByParadigmId(Collection<ParadigmsOfLangEntity> paradigmsOfLangsByParadigmId) {
+        this.paradigmsOfLangsByParadigmId = paradigmsOfLangsByParadigmId;
     }
 }

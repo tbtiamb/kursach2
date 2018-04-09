@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/kursach2/style.css">
 </head>
 <body>
+<div class="header">
+    <a href="./index.html"><img src="http://localhost:8080/kursach2/logo.png" alt="На главную" width="200px"></a>
 
+</div>
+<div class="title"></div>
+<div class="question"></div>
+<div class="answerForm">
+    <form method="post" action="/kursach2/rest/forum/addAnswer">
+        <textarea name="answer"></textarea>
+        <input type="submit" value="Answer">
+    </form>
+</div>
+<div class="answers">
+    <div class="answer"></div>
+</div>
+<div class="footer">
+    &copy; Все права защищены<br>
+    Мамиконян Н.Н. и Божик А.И. группа P3219, вариант 502
+</div>
 </body>
 </html>

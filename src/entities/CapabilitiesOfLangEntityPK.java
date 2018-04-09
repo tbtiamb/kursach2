@@ -5,27 +5,30 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 public class CapabilitiesOfLangEntityPK implements Serializable {
-    private int lang_id;
-    private int capability_id;
+    private int langId;
+    private int capabilityId;
 
-    @Column(name = "ИД_ЯЗЫКА")
+    public CapabilitiesOfLangEntityPK() {
+    }
+
+    @Column(name = "lang_id", nullable = false)
     @Id
-    public int getLang_id() {
-        return lang_id;
+    public int getLangId() {
+        return langId;
     }
 
-    public void setLang_id(int lang_id) {
-        this.lang_id = lang_id;
+    public void setLangId(int langId) {
+        this.langId = langId;
     }
 
-    @Column(name = "ИД_ВОЗМОЖНОСТИ")
+    @Column(name = "capability_id", nullable = false)
     @Id
-    public int getCapability_id() {
-        return capability_id;
+    public int getCapabilityId() {
+        return capabilityId;
     }
 
-    public void setCapability_id(int capability_id) {
-        this.capability_id = capability_id;
+    public void setCapabilityId(int capabilityId) {
+        this.capabilityId = capabilityId;
     }
 
     @Override
@@ -35,16 +38,16 @@ public class CapabilitiesOfLangEntityPK implements Serializable {
 
         CapabilitiesOfLangEntityPK that = (CapabilitiesOfLangEntityPK) o;
 
-        if (lang_id != that.lang_id) return false;
-        if (capability_id != that.capability_id) return false;
+        if (langId != that.langId) return false;
+        if (capabilityId != that.capabilityId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = lang_id;
-        result = 31 * result + capability_id;
+        int result = langId;
+        result = 31 * result + capabilityId;
         return result;
     }
 }

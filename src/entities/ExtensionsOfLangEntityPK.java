@@ -5,27 +5,30 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 public class ExtensionsOfLangEntityPK implements Serializable {
-    private int lang_id;
-    private int extensions_id;
+    private int langId;
+    private int extensionId;
 
-    @Column(name = "ИД_ЯЗЫКА")
+    public ExtensionsOfLangEntityPK() {
+    }
+
+    @Column(name = "lang_id", nullable = false)
     @Id
-    public int getLang_id() {
-        return lang_id;
+    public int getLangId() {
+        return langId;
     }
 
-    public void setLang_id(int lang_id) {
-        this.lang_id = lang_id;
+    public void setLangId(int langId) {
+        this.langId = langId;
     }
 
-    @Column(name = "ИД_РАСШИРЕНИЯ")
+    @Column(name = "extension_id", nullable = false)
     @Id
-    public int getExtensions_id() {
-        return extensions_id;
+    public int getExtensionId() {
+        return extensionId;
     }
 
-    public void setExtensions_id(int extensions_id) {
-        this.extensions_id = extensions_id;
+    public void setExtensionId(int extensionId) {
+        this.extensionId = extensionId;
     }
 
     @Override
@@ -35,16 +38,16 @@ public class ExtensionsOfLangEntityPK implements Serializable {
 
         ExtensionsOfLangEntityPK that = (ExtensionsOfLangEntityPK) o;
 
-        if (lang_id != that.lang_id) return false;
-        if (extensions_id != that.extensions_id) return false;
+        if (langId != that.langId) return false;
+        if (extensionId != that.extensionId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = lang_id;
-        result = 31 * result + extensions_id;
+        int result = langId;
+        result = 31 * result + extensionId;
         return result;
     }
 }

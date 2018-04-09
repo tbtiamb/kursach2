@@ -3,15 +3,15 @@ package entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "extensions_of_lang", schema = "s223552", catalog = "studs")
-@IdClass(ExtensionsOfLangEntityPK.class)
-public class ExtensionsOfLangEntity {
+@Table(name = "who_speaks", schema = "s223552", catalog = "studs")
+@IdClass(WhoSpeaksEntityPK.class)
+public class WhoSpeaksEntity {
     private int langId;
-    private int extensionId;
+    private int nationId;
     private ElementsEntity elementsByLangId;
-    private ExtensionsEntity extensionsByExtensionId;
+    private NationAndLocationEntity nationAndLocationByNationId;
 
-    public ExtensionsOfLangEntity() {
+    public WhoSpeaksEntity() {
     }
 
     @Id
@@ -25,13 +25,13 @@ public class ExtensionsOfLangEntity {
     }
 
     @Id
-    @Column(name = "extension_id", nullable = false)
-    public int getExtensionId() {
-        return extensionId;
+    @Column(name = "nation_id", nullable = false)
+    public int getNationId() {
+        return nationId;
     }
 
-    public void setExtensionId(int extensionId) {
-        this.extensionId = extensionId;
+    public void setNationId(int nationId) {
+        this.nationId = nationId;
     }
 
     @Override
@@ -39,10 +39,10 @@ public class ExtensionsOfLangEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ExtensionsOfLangEntity that = (ExtensionsOfLangEntity) o;
+        WhoSpeaksEntity that = (WhoSpeaksEntity) o;
 
         if (langId != that.langId) return false;
-        if (extensionId != that.extensionId) return false;
+        if (nationId != that.nationId) return false;
 
         return true;
     }
@@ -50,7 +50,7 @@ public class ExtensionsOfLangEntity {
     @Override
     public int hashCode() {
         int result = langId;
-        result = 31 * result + extensionId;
+        result = 31 * result + nationId;
         return result;
     }
 
@@ -65,12 +65,12 @@ public class ExtensionsOfLangEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "extension_id", referencedColumnName = "extension_id", nullable = false, insertable = false, updatable = false)
-    public ExtensionsEntity getExtensionsByExtensionId() {
-        return extensionsByExtensionId;
+    @JoinColumn(name = "nation_id", referencedColumnName = "nation_id", nullable = false, insertable = false, updatable = false)
+    public NationAndLocationEntity getNationAndLocationByNationId() {
+        return nationAndLocationByNationId;
     }
 
-    public void setExtensionsByExtensionId(ExtensionsEntity extensionsByExtensionId) {
-        this.extensionsByExtensionId = extensionsByExtensionId;
+    public void setNationAndLocationByNationId(NationAndLocationEntity nationAndLocationByNationId) {
+        this.nationAndLocationByNationId = nationAndLocationByNationId;
     }
 }

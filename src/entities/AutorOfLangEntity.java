@@ -1,62 +1,37 @@
 package entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name = "АВТОР_ЯЗЫКА", schema = "s223552", catalog = "studs")
+@Table(name = "autor_of_lang", schema = "s223552", catalog = "studs")
 @IdClass(AutorOfLangEntityPK.class)
-public class AutorOfLangEntity implements Serializable{
-    public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
-    public static EntityManager em = emf.createEntityManager();
-    
-    private int lang_id;
-    private int autor_id;
+public class AutorOfLangEntity {
+    private int langId;
+    private int autorId;
+    private ElementsEntity elementsByLangId;
+    private AutorsEntity autorsByAutorId;
 
-    public AutorOfLangEntity() {}
-
-    public AutorOfLangEntity(int lang_id, int autor_id) {
-        this.lang_id = lang_id;
-        this.autor_id = autor_id;
-    }
-
-    public static AutorOfLangEntity readElem(int id){
-        em.getTransaction().begin();
-        AutorOfLangEntity elem = em.find(AutorOfLangEntity.class, id);
-        em.getTransaction().commit();
-        return elem;
-    }
-
-    public static void addElem(AutorOfLangEntity elem) {
-        em.getTransaction().begin();
-        em.persist(elem);
-        em.getTransaction().commit();
-    }
-
-    public static void removeElem(AutorOfLangEntity elem) {
-        em.getTransaction().begin();
-        em.remove(elem);
-        em.getTransaction().commit();
-    }
-    
-    @Id
-    @Column(name = "ИД_ЯЗЫКА")
-    public int getLang_id() {
-        return lang_id;
-    }
-
-    public void setLang_id(int lang_id) {
-        this.lang_id = lang_id;
+    public AutorOfLangEntity() {
     }
 
     @Id
-    @Column(name = "ИД_АВТОРА")
-    public int getAutor_id() {
-        return autor_id;
+    @Column(name = "lang_id", nullable = false)
+    public int getLangId() {
+        return langId;
     }
 
-    public void setAutor_id(int autor_id) {
-        this.autor_id = autor_id;
+    public void setLangId(int langId) {
+        this.langId = langId;
+    }
+
+    @Id
+    @Column(name = "autor_id", nullable = false)
+    public int getAutorId() {
+        return autorId;
+    }
+
+    public void setAutorId(int autorId) {
+        this.autorId = autorId;
     }
 
     @Override
@@ -66,16 +41,36 @@ public class AutorOfLangEntity implements Serializable{
 
         AutorOfLangEntity that = (AutorOfLangEntity) o;
 
-        if (lang_id != that.lang_id) return false;
-        if (autor_id != that.autor_id) return false;
+        if (langId != that.langId) return false;
+        if (autorId != that.autorId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = lang_id;
-        result = 31 * result + autor_id;
+        int result = langId;
+        result = 31 * result + autorId;
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "lang_id", referencedColumnName = "element_id", nullable = false, insertable = false, updatable = false)
+    public ElementsEntity getElementsByLangId() {
+        return elementsByLangId;
+    }
+
+    public void setElementsByLangId(ElementsEntity elementsByLangId) {
+        this.elementsByLangId = elementsByLangId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "autor_id", referencedColumnName = "autor_id", nullable = false, insertable = false, updatable = false)
+    public AutorsEntity getAutorsByAutorId() {
+        return autorsByAutorId;
+    }
+
+    public void setAutorsByAutorId(AutorsEntity autorsByAutorId) {
+        this.autorsByAutorId = autorsByAutorId;
     }
 }

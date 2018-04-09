@@ -3,15 +3,15 @@ package entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "extensions_of_lang", schema = "s223552", catalog = "studs")
-@IdClass(ExtensionsOfLangEntityPK.class)
-public class ExtensionsOfLangEntity {
+@Table(name = "paradigms_of_lang", schema = "s223552", catalog = "studs")
+@IdClass(ParadigmsOfLangEntityPK.class)
+public class ParadigmsOfLangEntity {
     private int langId;
-    private int extensionId;
+    private int paradigmId;
     private ElementsEntity elementsByLangId;
-    private ExtensionsEntity extensionsByExtensionId;
+    private ParadigmsEntity paradigmsByParadigmId;
 
-    public ExtensionsOfLangEntity() {
+    public ParadigmsOfLangEntity() {
     }
 
     @Id
@@ -25,13 +25,13 @@ public class ExtensionsOfLangEntity {
     }
 
     @Id
-    @Column(name = "extension_id", nullable = false)
-    public int getExtensionId() {
-        return extensionId;
+    @Column(name = "paradigm_id", nullable = false)
+    public int getParadigmId() {
+        return paradigmId;
     }
 
-    public void setExtensionId(int extensionId) {
-        this.extensionId = extensionId;
+    public void setParadigmId(int paradigmId) {
+        this.paradigmId = paradigmId;
     }
 
     @Override
@@ -39,10 +39,10 @@ public class ExtensionsOfLangEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ExtensionsOfLangEntity that = (ExtensionsOfLangEntity) o;
+        ParadigmsOfLangEntity that = (ParadigmsOfLangEntity) o;
 
         if (langId != that.langId) return false;
-        if (extensionId != that.extensionId) return false;
+        if (paradigmId != that.paradigmId) return false;
 
         return true;
     }
@@ -50,7 +50,7 @@ public class ExtensionsOfLangEntity {
     @Override
     public int hashCode() {
         int result = langId;
-        result = 31 * result + extensionId;
+        result = 31 * result + paradigmId;
         return result;
     }
 
@@ -65,12 +65,12 @@ public class ExtensionsOfLangEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "extension_id", referencedColumnName = "extension_id", nullable = false, insertable = false, updatable = false)
-    public ExtensionsEntity getExtensionsByExtensionId() {
-        return extensionsByExtensionId;
+    @JoinColumn(name = "paradigm_id", referencedColumnName = "paradigm_id", nullable = false, insertable = false, updatable = false)
+    public ParadigmsEntity getParadigmsByParadigmId() {
+        return paradigmsByParadigmId;
     }
 
-    public void setExtensionsByExtensionId(ExtensionsEntity extensionsByExtensionId) {
-        this.extensionsByExtensionId = extensionsByExtensionId;
+    public void setParadigmsByParadigmId(ParadigmsEntity paradigmsByParadigmId) {
+        this.paradigmsByParadigmId = paradigmsByParadigmId;
     }
 }

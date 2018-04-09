@@ -1,26 +1,25 @@
 package entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
-@Table(name = "РАСШИРЕНИЯ", schema = "s223552", catalog = "studs")
-public class ExtensionsEntity implements Serializable {
-    public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
-    public static EntityManager em = emf.createEntityManager();
-    private static final int serialVersionUID = 1;
-
-    private int extension_id;
+@Table(name = "extensions", schema = "s223552", catalog = "studs")
+public class ExtensionsEntity {
+    private int extensionId;
     private String extension;
+    private Collection<ExtensionsOfLangEntity> extensionsOfLangsByExtensionId;
 
     public ExtensionsEntity() {}
 
-    public ExtensionsEntity(int extension_id, String extension) {
-        this.extension_id = extension_id;
+    public ExtensionsEntity(String extension, Collection<ExtensionsOfLangEntity> extensionsOfLangsByExtensionId) {
         this.extension = extension;
+        this.extensionsOfLangsByExtensionId = extensionsOfLangsByExtensionId;
     }
 
     public static ExtensionsEntity readElem(int id){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         ExtensionsEntity elem = em.find(ExtensionsEntity.class, id);
         em.getTransaction().commit();
@@ -28,40 +27,45 @@ public class ExtensionsEntity implements Serializable {
     }
 
     public static void addElem(ExtensionsEntity elem) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(elem);
         em.getTransaction().commit();
     }
 
     public static void removeElem(ExtensionsEntity elem) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.remove(elem);
         em.getTransaction().commit();
     }
 
     public static void updateStatus(ExtensionsEntity elem, String ext){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Query query = em.createQuery("UPDATE ExtensionsEntity extension SET  extension.extension = :ext WHERE  extension.extension_id = :elem_id");
+        Query query = em.createQuery("UPDATE ExtensionsEntity extension SET  extension.extension = :ext WHERE  extension.extensionId = :elem_id");
         query.setParameter("ext", ext);
-        query.setParameter("elem_id", elem.getExtension_id());
+        query.setParameter("elem_id", elem.getExtensionId());
         int rowCount = query.executeUpdate();
         em.getTransaction().commit();
     }
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ИД_РАСШИРЕНИЯ")
-    public int getExtension_id() {
-        return extension_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "extension_id", nullable = false)
+    public int getExtensionId() {
+        return extensionId;
     }
 
-    public void setExtension_id(int extension_id) {
-        this.extension_id = extension_id;
+    public void setExtensionId(int extensionId) {
+        this.extensionId = extensionId;
     }
 
     @Basic
-    @Column(name = "РАСШИРЕНИЕ")
+    @Column(name = "extension", nullable = false, length = -1)
     public String getExtension() {
         return extension;
     }
@@ -77,7 +81,7 @@ public class ExtensionsEntity implements Serializable {
 
         ExtensionsEntity that = (ExtensionsEntity) o;
 
-        if (extension_id != that.extension_id) return false;
+        if (extensionId != that.extensionId) return false;
         if (extension != null ? !extension.equals(that.extension) : that.extension != null) return false;
 
         return true;
@@ -85,8 +89,17 @@ public class ExtensionsEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = extension_id;
+        int result = extensionId;
         result = 31 * result + (extension != null ? extension.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "extensionsByExtensionId")
+    public Collection<ExtensionsOfLangEntity> getExtensionsOfLangsByExtensionId() {
+        return extensionsOfLangsByExtensionId;
+    }
+
+    public void setExtensionsOfLangsByExtensionId(Collection<ExtensionsOfLangEntity> extensionsOfLangsByExtensionId) {
+        this.extensionsOfLangsByExtensionId = extensionsOfLangsByExtensionId;
     }
 }

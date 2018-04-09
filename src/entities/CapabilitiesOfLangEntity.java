@@ -1,62 +1,37 @@
 package entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name = "ВОЗМОЖНОСТИ_ЯЗЫКА", schema = "s223552", catalog = "studs")
+@Table(name = "capabilities_of_lang", schema = "s223552", catalog = "studs")
 @IdClass(CapabilitiesOfLangEntityPK.class)
-public class CapabilitiesOfLangEntity implements Serializable {
-    public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
-    public static EntityManager em = emf.createEntityManager();
+public class CapabilitiesOfLangEntity {
+    private int langId;
+    private int capabilityId;
+    private ElementsEntity elementsByLangId;
+    private CapabilitiesEntity capabilitiesByCapabilityId;
 
-    private int lang_id;
-    private int capability_id;
-
-    public CapabilitiesOfLangEntity() {}
-
-    public CapabilitiesOfLangEntity(int lang_id, int capability_id) {
-        this.lang_id = lang_id;
-        this.capability_id = capability_id;
-    }
-
-    public static CapabilitiesOfLangEntity readElem(int id){
-        em.getTransaction().begin();
-        CapabilitiesOfLangEntity elem = em.find(CapabilitiesOfLangEntity.class, id);
-        em.getTransaction().commit();
-        return elem;
-    }
-
-    public static void addElem(CapabilitiesOfLangEntity elem) {
-        em.getTransaction().begin();
-        em.persist(elem);
-        em.getTransaction().commit();
-    }
-
-    public static void removeElem(CapabilitiesOfLangEntity elem) {
-        em.getTransaction().begin();
-        em.remove(elem);
-        em.getTransaction().commit();
+    public CapabilitiesOfLangEntity() {
     }
 
     @Id
-    @Column(name = "ИД_ЯЗЫКА")
-    public int getLang_id() {
-        return lang_id;
+    @Column(name = "lang_id", nullable = false)
+    public int getLangId() {
+        return langId;
     }
 
-    public void setLang_id(int lang_id) {
-        this.lang_id = lang_id;
+    public void setLangId(int langId) {
+        this.langId = langId;
     }
 
     @Id
-    @Column(name = "ИД_ВОЗМОЖНОСТИ")
-    public int getCapability_id() {
-        return capability_id;
+    @Column(name = "capability_id", nullable = false)
+    public int getCapabilityId() {
+        return capabilityId;
     }
 
-    public void setCapability_id(int capability_id) {
-        this.capability_id = capability_id;
+    public void setCapabilityId(int capabilityId) {
+        this.capabilityId = capabilityId;
     }
 
     @Override
@@ -66,16 +41,36 @@ public class CapabilitiesOfLangEntity implements Serializable {
 
         CapabilitiesOfLangEntity that = (CapabilitiesOfLangEntity) o;
 
-        if (lang_id != that.lang_id) return false;
-        if (capability_id != that.capability_id) return false;
+        if (langId != that.langId) return false;
+        if (capabilityId != that.capabilityId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = lang_id;
-        result = 31 * result + capability_id;
+        int result = langId;
+        result = 31 * result + capabilityId;
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "lang_id", referencedColumnName = "element_id", nullable = false, insertable = false, updatable = false)
+    public ElementsEntity getElementsByLangId() {
+        return elementsByLangId;
+    }
+
+    public void setElementsByLangId(ElementsEntity elementsByLangId) {
+        this.elementsByLangId = elementsByLangId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "capability_id", referencedColumnName = "capability_id", nullable = false, insertable = false, updatable = false)
+    public CapabilitiesEntity getCapabilitiesByCapabilityId() {
+        return capabilitiesByCapabilityId;
+    }
+
+    public void setCapabilitiesByCapabilityId(CapabilitiesEntity capabilitiesByCapabilityId) {
+        this.capabilitiesByCapabilityId = capabilitiesByCapabilityId;
     }
 }

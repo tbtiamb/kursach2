@@ -1,39 +1,51 @@
 package entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "users", schema = "s223552", catalog = "studs")
-public class UsersEntity implements Serializable{
-    private static final long serialVersionUID = 1L;
-
+public class UsersEntity {
+//    public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+//    public static EntityManager em = emf.createEntityManager();
     private long id;
     private String login;
-    private int password;
+    private Integer password;
     private String email;
 
     public UsersEntity() {
     }
 
-    public UsersEntity(String login, int password, String email) {
+    public UsersEntity(String login, Integer password, String email) {
         this.login = login;
         this.password = password;
         this.email = email;
     }
 
-    public static void addUser(String login, String password){
+    public static UsersEntity readElem(long id){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
         EntityManager em = emf.createEntityManager();
-        UsersEntity user = new UsersEntity(login, password.hashCode(), "lol@mail.com");
+        em.getTransaction().begin();
+        UsersEntity elem = em.find(UsersEntity.class, id);
+        em.getTransaction().commit();
+        return elem;
+    }
+
+    public static void addUser(UsersEntity user){//(String login, String password, String email){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
+        EntityManager em = emf.createEntityManager();
+        //UsersEntity user = new UsersEntity(login, password.hashCode(), email);
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
     }
 
+    public void setPassword(int password) {
+        this.password = password;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     public long getId() {
         return id;
     }
@@ -43,7 +55,7 @@ public class UsersEntity implements Serializable{
     }
 
     @Basic
-    @Column(name = "login")
+    @Column(name = "login", nullable = false, length = -1)
     public String getLogin() {
         return login;
     }
@@ -53,17 +65,17 @@ public class UsersEntity implements Serializable{
     }
 
     @Basic
-    @Column(name = "password")
-    public int getPassword() {
+    @Column(name = "password", nullable = false)
+    public Integer getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(Integer password) {
         this.password = password;
     }
 
     @Basic
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = -1)
     public String getEmail() {
         return email;
     }

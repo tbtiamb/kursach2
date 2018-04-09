@@ -4,40 +4,36 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "questions", schema = "s223552", catalog = "studs")
-public class QuestionsEntity {
+@Table(name = "answers", schema = "s223552", catalog = "studs")
+public class AnswersEntity {
     private long id;
-    private String title;
-    private String description;
-    private Date askeddate;
+    private String answer;
+    private Date dateofanswer;
     private Integer likes;
     private Integer dislikes;
+    private QuestionsEntity questionsByQuestionid;
     private UsersEntity usersByUserid;
 
+    public AnswersEntity() {
+    }
 
-
-//    EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
-//    EntityManager em = emf.createEntityManager();
-
-    public QuestionsEntity() {}
-
-    public QuestionsEntity(String title, String description, Date askeddate, UsersEntity usersByUserid) {
-        this.title = title;
-        this.description = description;
-        this.askeddate = askeddate;
+    public AnswersEntity(String answer, Date dateofanswer, QuestionsEntity questionsByQuestionid, UsersEntity usersByUserid) {
+        this.answer = answer;
+        this.dateofanswer = dateofanswer;
+        this.questionsByQuestionid = questionsByQuestionid;
         this.usersByUserid = usersByUserid;
     }
 
-    public static QuestionsEntity readElem(long id){
+    public static AnswersEntity readElem(long id){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        QuestionsEntity elem = em.find(QuestionsEntity.class, id);
+        AnswersEntity elem = em.find(AnswersEntity.class, id);
         em.getTransaction().commit();
         return elem;
     }
 
-    public static void addElem(QuestionsEntity elem) {
+    public static void addElem(AnswersEntity elem) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Languages");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -57,33 +53,23 @@ public class QuestionsEntity {
     }
 
     @Basic
-    @Column(name = "title")
-    public String getTitle() {
-        return title;
+    @Column(name = "answer")
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Basic
-    @Column(name = "description")
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     @Basic
-    @Column(name = "askeddate")
-    public Date getAskeddate() {
-        return askeddate;
+    @Column(name = "dateofanswer")
+    public Date getDateofanswer() {
+        return dateofanswer;
     }
 
-    public void setAskeddate(Date askeddate) {
-        this.askeddate = askeddate;
+    public void setDateofanswer(Date dateofanswer) {
+        this.dateofanswer = dateofanswer;
     }
 
     @Basic
@@ -111,12 +97,11 @@ public class QuestionsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        QuestionsEntity that = (QuestionsEntity) o;
+        AnswersEntity that = (AnswersEntity) o;
 
         if (id != that.id) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (askeddate != null ? !askeddate.equals(that.askeddate) : that.askeddate != null) return false;
+        if (answer != null ? !answer.equals(that.answer) : that.answer != null) return false;
+        if (dateofanswer != null ? !dateofanswer.equals(that.dateofanswer) : that.dateofanswer != null) return false;
         if (likes != null ? !likes.equals(that.likes) : that.likes != null) return false;
         if (dislikes != null ? !dislikes.equals(that.dislikes) : that.dislikes != null) return false;
 
@@ -126,16 +111,25 @@ public class QuestionsEntity {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (askeddate != null ? askeddate.hashCode() : 0);
+        result = 31 * result + (answer != null ? answer.hashCode() : 0);
+        result = 31 * result + (dateofanswer != null ? dateofanswer.hashCode() : 0);
         result = 31 * result + (likes != null ? likes.hashCode() : 0);
         result = 31 * result + (dislikes != null ? dislikes.hashCode() : 0);
         return result;
     }
 
     @ManyToOne
-    @JoinColumn(name = "userid", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "questionid", referencedColumnName = "id")
+    public QuestionsEntity getQuestionsByQuestionid() {
+        return questionsByQuestionid;
+    }
+
+    public void setQuestionsByQuestionid(QuestionsEntity questionsByQuestionid) {
+        this.questionsByQuestionid = questionsByQuestionid;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "userid", referencedColumnName = "id")
     public UsersEntity getUsersByUserid() {
         return usersByUserid;
     }

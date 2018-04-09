@@ -4,11 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-public class AutorOfLangEntityPK implements Serializable {
+public class ExtraLanginfoOfLangEntityPK implements Serializable {
     private int langId;
-    private int autorId;
+    private int langinfoId;
 
-    public AutorOfLangEntityPK() {
+    public ExtraLanginfoOfLangEntityPK() {
     }
 
     @Column(name = "lang_id", nullable = false)
@@ -21,14 +21,14 @@ public class AutorOfLangEntityPK implements Serializable {
         this.langId = langId;
     }
 
-    @Column(name = "autor_id", nullable = false)
+    @Column(name = "langinfo_id", nullable = false)
     @Id
-    public int getAutorId() {
-        return autorId;
+    public int getLanginfoId() {
+        return langinfoId;
     }
 
-    public void setAutorId(int autorId) {
-        this.autorId = autorId;
+    public void setLanginfoId(int langinfoId) {
+        this.langinfoId = langinfoId;
     }
 
     @Override
@@ -36,10 +36,10 @@ public class AutorOfLangEntityPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AutorOfLangEntityPK that = (AutorOfLangEntityPK) o;
+        ExtraLanginfoOfLangEntityPK that = (ExtraLanginfoOfLangEntityPK) o;
 
         if (langId != that.langId) return false;
-        if (autorId != that.autorId) return false;
+        if (langinfoId != that.langinfoId) return false;
 
         return true;
     }
@@ -47,7 +47,7 @@ public class AutorOfLangEntityPK implements Serializable {
     @Override
     public int hashCode() {
         int result = langId;
-        result = 31 * result + autorId;
+        result = 31 * result + langinfoId;
         return result;
     }
 }
